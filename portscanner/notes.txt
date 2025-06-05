@@ -3,3 +3,13 @@
 
 So I've managed to get a simple scanner running thanks to a tutorial video. It scans a range of ports on a given host and reports if they are open or closed.
 I have noticed that ive gotten erros when trying to scan a large range of ports. I'm not sure what that is about
+
+
+6/5
+
+So it seems like there is an issue with trying to have muliplte threads running when using scapy. im not 100% sure but it seems to be that since im scanning multiple
+ports at once with threadsm it causes scapy to not scan properly.
+
+bad fix: So if i limit the amount fo workers to 1 there are no errors but it takes a long time 
+
+Next step is to banner grab

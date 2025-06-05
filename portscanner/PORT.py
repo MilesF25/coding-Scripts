@@ -10,24 +10,17 @@
 from concurrent.futures import ThreadPoolExecutor
 import socket
 import time
+import threading
 
 from scapy.all import IP, TCP, UDP, sr1
+
 
 # target_ip = "192.168.1.1"
 # port = 80
 
-# packet = IP(dst=target_ip) / TCP(dport=port, flags="S")
-# response = sr1(packet, timeout=1, verbose=0)
+max_workers = 1
 
-# if response is None:
-#     print(f"Port {port} is filtered (no response)")
-# elif response.haslayer(TCP):
-#     if response.getlayer(TCP).flags == 0x12:
-#         print(f"Port {port} is open (SYN-ACK)")
-#     elif response.getlayer(TCP).flags == 0x14:
-#         print(f"Port {port} is closed (RST)")
-
-max_workers = 100
+scapy_lock = threading.Lock()
 
 
 def generate_port_chunks(port_range):
@@ -64,6 +57,8 @@ def scan(ip_address, port_chunk):
 
             # the flag sets tcp flags to SYN, which is a request to open a connection
             packet = IP(dst=ip_address) / TCP(dport=port, flags="S")
+            with scapy_lock:
+                resp = sr1(packet, timeout=1, verbose=0)
 
             # the response
             response = sr1(packet, timeout=1, verbose=0)
