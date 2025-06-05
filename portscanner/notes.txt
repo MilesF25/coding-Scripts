@@ -1,0 +1,5 @@
+
+6/2
+
+So I've managed to get a simple scanner running thanks to a tutorial video. It scans a range of ports on a given host and reports if they are open or closed.
+I have noticed that ive gotten erros when trying to scan a large range of ports. I'm not sure what that is about
