@@ -13,3 +13,7 @@ ports at once with threadsm it causes scapy to not scan properly.
 bad fix: So if i limit the amount fo workers to 1 there are no errors but it takes a long time 
 
 Next step is to banner grab
+
+
+6/7
+todo: look into using -sV for banner grabbing when i have time
